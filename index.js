@@ -1,2 +1,2 @@
-module.exports.Sender = require('./Sender');
-module.exports.Receiver = require('./Receiver');
+module.exports.Sender = require('./src/Sender');
+module.exports.Receiver = require('./src/Receiver');
