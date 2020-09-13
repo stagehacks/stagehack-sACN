@@ -1,5 +1,5 @@
-const ACNSender = require('./../hack-sACN').Sender;
-const ACNReceiver = require('./../hack-sACN').Receiver;
+const ACNSender = require('./../stagehack-sACN').Sender;
+const ACNReceiver = require('./../stagehack-sACN').Receiver;
 
 ACNSender.Start();
 ACNReceiver.Start();
