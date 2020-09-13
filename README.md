@@ -7,16 +7,19 @@ npm coming soon
 # Sender
 ```javascript
 const ACNSender = require('hack-sACN').Sender;
-ACNSender.Start(options);
+ACNSender.Start([options]);
+var universe = new ACNSender.Universe([universe], [priority]);
 ```
-### Options:
+### Sender Options:
 * `interfaces`: Array of network interfaces on the device to send from. ex: `['192.168.0.40, 10.0.0.5']`
-* `cid`: 16-character unique string to represent this device
-* `source`: Plaintext name of this device
+* `cid`: 16-character unique string to represent this device. ex: `"036b2d4932174812"`
+* `source`: Plaintext name of this device. ex: `"Tim's MacBook Pro"`
 
+### Universe Options:
+* `universe`: Packet's Universe. Default: `1`
+* `priority`: Packet's Priority. Defauly: `100`
 
 ### Example:
-Sends 4 DMX addresses on Universe 1 with Priority 100
 ```javascript
 const ACNSender = require('hack-sACN').Sender;
 ACNSender.Start();
