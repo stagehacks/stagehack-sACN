@@ -15,7 +15,7 @@ send1.on("ready", function(){
 });
 ```
 
-## Receiver
+# Receiver
 ```
 const ACNReceiver = require('hack-sACN').Receiver;
 
