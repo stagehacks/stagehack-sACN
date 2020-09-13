@@ -1,5 +1,10 @@
-# stagehack-sACN
-Dead-Simple library for sending and receiving sACN (E1.31) lighting data. The full ESTA ANSI E1.31 control protocol specification is published at  
+# 🔌stagehack-sACN
+Simple library for sending and receiving sACN (E1.31) lighting data. The full ESTA ANSI E1.31 control protocol specification is published at  
+
+This library supports
+* Multiple network interfaces
+* Multicast and Unicast
+
 
 ## Installation
 npm coming soon
@@ -28,7 +33,15 @@ ACNSender.Start({
 
 var sender = new ACNSender.Universe(1, 100);
 sender.on("ready", function(){
- this.send([255, 0, 0, 255]);
+	 // send as an array
+	this.send([255, 0, 0, 255]);
+
+	// send as key-value pairs
+	this.send({
+	 	4: 255,
+	 	11: 150,
+	 	301: 155
+	});
 });
 ```
 
