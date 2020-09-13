@@ -37,7 +37,7 @@ sender.on("ready", function(){
 ```javascript
 const ACNReceiver = require('stagehack-sACN').Receiver;
 ACNReceiver.Start();
-var universe = new ACNReceiver.Universe(1);
+var universe = new ACNReceiver.Universe([universe]);
 ```
 ### Universe Options:
 * `universe`: Default: `1`
