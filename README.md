@@ -5,7 +5,7 @@ Dead-Simple library for sending and receiving sACN (E1.31) lighting data.
 npm coming soon
 
 # Sender
-```
+```javascript
 const ACNSender = require('hack-sACN').Sender;
 
 ACNSender.Start();
@@ -16,7 +16,7 @@ send1.on("ready", function(){
 ```
 
 # Receiver
-```
+```javascript
 const ACNReceiver = require('hack-sACN').Receiver;
 
 ACNReceiver.Start();
