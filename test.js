@@ -45,7 +45,7 @@ test3receive.on("packet", function(packet){
 
 
 
-const ACNSenderInterface = require('./../hack-sACN').Sender;
+const ACNSenderInterface = require('./../stagehack-sACN').Sender;
 ACNSenderInterface.Start({
 	interface: "192.168.0.40"
 });

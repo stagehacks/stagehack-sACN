@@ -82,22 +82,27 @@ Packet.prototype.getBuffer = function(){
 }
 
 
-
-Packet.prototype.getSlots = function(){
-	return this._slots;
-}
-Packet.prototype.getSequence = function(){
-	return this._framingLayer.readUInt8(73);
-}
 Packet.prototype.getUniverse = function(){
 	return this._framingLayer.readUInt16BE(75);
 }
 Packet.prototype.getPriority = function(){
 	return this._framingLayer.readUInt8(70);
 }
+Packet.prototype.getCID = function(){
+	return this._framingLayer.slice(6, this._framingLayer.indexOf(0x00, 6)).toString();
+}
 Packet.prototype.getSource = function(){
 	return this._framingLayer.slice(6, this._framingLayer.indexOf(0x00, 6)).toString();
 }
+Packet.prototype.getSlots = function(){
+	return this._slots;
+}
+Packet.prototype.getSequence = function(){
+	return this._framingLayer.readUInt8(73);
+}
+
+
+
 
 
 
