@@ -1,9 +1,10 @@
 # 🔌stagehack-sACN
-Simple library for sending and receiving sACN (E1.31) lighting data. The full ESTA ANSI E1.31 control protocol specification is published at  
+Simple library for sending and receiving sACN (E1.31) lighting data. It is not the full E1.31 protocol, but is good enough for most projects. The full ESTA ANSI E1.31 control protocol specification is published at  
 
 This library supports
 * Multiple network interfaces
 * Multicast and Unicast
+* ETC Net3 (coming soon)
 
 
 ## Installation
