@@ -10,8 +10,12 @@
   	"sACN",
   	"e131",
   	"dmx",
-  	"lighting"
+    "dmx512",
+  	"lighting",
+    "enttec",
+    "dmxking"
   ],
   "author": "Alec Sparks",
-  "license": "WTFPL"
+  "license": "WTFPL",
+  "repository": "https://github.com/sparks-alec/stagehack-sACN"
 }

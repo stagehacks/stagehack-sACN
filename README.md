@@ -9,7 +9,9 @@ Simple library for sending and receiving [sACN (E1.31)](https://tsp.esta.org/tsp
 
 
 ## Installation
-npm coming soon
+`npm install stagehack-sacn`
+
+
 
 # Sender
 ```javascript
@@ -19,7 +21,7 @@ var universe = new ACNSender.Universe([universe], [priority]);
 ```
 ### Sender Options:
 * `interfaces`: Array of IPv4 network interfaces on the device to send from. ex: `['192.168.0.40, 10.0.0.5']`
-* `cid`: 16-character unique string to represent this device. ex: `"036b2d4932174812"`
+* `cid`: 16-character UUID to represent this device. ex: `"036b2d4932174812"`
 * `source`: Plaintext name of this device. ex: `"Tim's MacBook Pro"`
 
 ### Universe Options:
@@ -38,7 +40,7 @@ sender.on("ready", function(){
 	 // send as an array
 	this.send([255, 0, 0, 255]);
 
-	// send as key-value pairs
+	// or send as key-value pairs
 	this.send({
 	 	4: 255,
 	 	11: 150,
@@ -46,6 +48,7 @@ sender.on("ready", function(){
 	});
 });
 ```
+
 
 
 # Receiver
@@ -64,6 +67,8 @@ receiver.on("packet", function(packet){
 });
 ```
 
+
+
 # Packet
 Setters:
 * `setUniverse`: sets the Universe
@@ -77,5 +82,6 @@ Getters:
 * `getPriority`: gets the Priority
 * `getCID`: gets the CID
 * `getSource`: gets the Source
+* `getSlots`: gets current Slots (length 1-512)
 * `getSequence`: gets current Sequence
 * `getBuffer`: returns a Buffer of the complete sACN Packet
