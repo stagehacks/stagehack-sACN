@@ -5,6 +5,13 @@ ACNSender.Start();
 ACNReceiver.Start();
 
 
+var test0send = new ACNSender.Universe();
+test0send.on("ready", function(){
+	console.log(this.getPossibleInterfaces());
+	console.log("");
+});
+
+
 
 var test1send = new ACNSender.Universe();
 test1send.on("ready", function(){

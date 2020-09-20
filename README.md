@@ -85,3 +85,8 @@ Getters:
 * `getSlots`: gets current Slots (length 1-512)
 * `getSequence`: gets current Sequence
 * `getBuffer`: returns a Buffer of the complete sACN Packet
+
+
+# TODO
+* Add "allReady" event for when all Senders/Receivers are ready
+* Implement Net3

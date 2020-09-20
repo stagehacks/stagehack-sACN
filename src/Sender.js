@@ -90,7 +90,9 @@ Universe.prototype.toString = function(){
 	}
 }
 
-
+Universe.prototype.getPossibleInterfaces = function(){
+	return getNetworkInterfaces();
+}
 
 function getNetworkInterfaces(){
 	var out = [];
