@@ -1,6 +1,6 @@
 {
   "name": "stagehack-sacn",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "description": "Library for sending and receiving sACN (E1.31) lighting data",
   "main": "index.js",
   "scripts": {

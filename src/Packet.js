@@ -37,7 +37,7 @@ Packet.prototype.update = function(){
 	this._source.copy(this._framingLayer, 6); 									// Source Name
 	this._framingLayer.writeUInt8(this._priority, 70); 							// Priority
 	this._framingLayer.writeUInt16BE(0x0000, 71); 								// Synchronization Address
-	this._framingLayer.writeUInt8(this.sequence, 73); 							// Sequence Number
+	this._framingLayer.writeUInt8(this._sequence, 73); 							// Sequence Number
 	this._framingLayer.writeUInt8(0x00, 74); 									// Options
 	this._framingLayer.writeUInt16BE(this._universe, 75); 						// Universe
 
@@ -75,8 +75,8 @@ Packet.prototype.setSlots = function(slots){
 	this.update();
 }
 Packet.prototype.getBuffer = function(){
-	this.sequence++;
-	this._framingLayer.writeUInt8(this.sequence, 73);
+	this._sequence++;
+	this._framingLayer.writeUInt8(this._sequence, 73);
 	this.update();
 	return this._buffer;
 }

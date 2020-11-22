@@ -49,6 +49,8 @@ sender.on("ready", function(){
 });
 ```
 
+Sender also provides `sender.getPossibleInterfaces()` which returns a list of all IPv4 network interfaces on the device. Useful for populating a dropdown or other UI.
+
 
 
 # Receiver
