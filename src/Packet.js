@@ -76,6 +76,9 @@ Packet.prototype.setSlots = function(slots){
 }
 Packet.prototype.getBuffer = function(){
 	this._sequence++;
+	if(this._sequence>255){
+		this._sequence = 0;
+	}
 	this._framingLayer.writeUInt8(this._sequence, 73);
 	this.update();
 	return this._buffer;
