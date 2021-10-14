@@ -60,8 +60,12 @@ Universe.prototype.send = function(arg){
 	}
 	this.packet.setSlots(slots);
 	for(var i in _interfaces){
-		this._sockets[_interfaces[i]].setMulticastInterface(_interfaces[i]);
-		this._sockets[_interfaces[i]].send(this.packet.getBuffer(), 5568, sACNPacket.getMulticastGroup(this.universe));
+    if (_options.type && _options.type === 'unicast') {
+      this._sockets[_interfaces[i]].send(this.packet.getBuffer(), 5568, _interfaces[i]);
+    } else {
+      this._sockets[_interfaces[i]].setMulticastInterface(_interfaces[i]);
+      this._sockets[_interfaces[i]].send(this.packet.getBuffer(), 5568, sACNPacket.getMulticastGroup(this.universe));
+    }
 	}
 }
 
