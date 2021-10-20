@@ -35,21 +35,15 @@ function Universe(universe, priority) {
   }
 
   this.packet = new sACNPacket.Packet();
-  this.syncPacket = new sACNPacket.Packet();
   this.packet.setUniverse(this.universe);
   this.packet.setPriority(this.priority);
-  this.syncPacket.setUniverse(this.universe);
-  this.syncPacket.setPriority(this.priority);
-  this.syncPacket.setIsSync(true);
 
   if (_options && _options.cid && _options.cid.length <= 16) {
     this.packet.setCID(_options.cid);
-    this.syncPacket.setCID(_options.cid);
   }
 
   if (_options && _options.source) {
     this.packet.setSource(_options.source);
-    this.syncPacket.setSource(_options.source);
   }
 }
 
@@ -66,16 +60,10 @@ Universe.prototype.send = function (arg) {
     }
   }
   this.packet.setSlots(slots);
-  this.syncPacket.setSlots(slots);
   for (var i in _interfaces) {
     if (_options.type && _options.type === 'unicast') {
       this._sockets[_interfaces[i]].send(
         this.packet.getBuffer(),
-        5568,
-        _interfaces[i]
-      );
-      this._sockets[_interfaces[i]].send(
-        this.syncPacket.getBuffer(),
         5568,
         _interfaces[i]
       );
