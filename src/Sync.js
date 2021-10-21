@@ -62,13 +62,11 @@ Universe.prototype.send = function (arg) {
   }
   this.syncPacket.setSlots(slots);
   for (var i in _interfaces) {
-    if (_options.type && _options.type === 'unicast') {
-      this._sockets[_interfaces[i]].send(
-        this.syncPacket.getBuffer(),
-        5568,
-        _interfaces[i]
-      );
-    }
+    this._sockets[_interfaces[i]].send(
+      this.syncPacket.getBuffer(),
+      5568,
+      _interfaces[i]
+    );
   }
 };
 
