@@ -53,6 +53,46 @@ sender.on("ready", function(){
 Sender also provides `sender.getPossibleInterfaces()` which returns a list of all IPv4 network interfaces on the device. Useful for populating a dropdown or other UI.
 
 
+# Sync
+
+Sync is essentially the same as the sender, except that instead of sending something like color data it just sends a signal for everything to update. Most systems won't require this and will just update when they get new information from the `Sender`.
+
+```javascript
+const ACNSync = require('stagehack-sACN').Sync;
+ACNSync.Start([options]);
+var universe = new ACNSync.Universe([universe], [priority]);
+```
+### Sync Options:
+* `interfaces`: Array of IPv4 network interfaces on the device to send from. ex: `['192.168.0.40, 10.0.0.5']`
+* `cid`: 16-character UUID to represent this device. ex: `"036b2d4932174812"`
+* `source`: Plaintext name of this device. ex: `"Tim's MacBook Pro"`
+* `type`: `"unicast"` or `"multicast"`. Defaults to `"multicast"` if neither is provided
+
+### Universe Options:
+* `universe`: Default: `1`
+* `priority`: Default: `100`
+
+### Example:
+```javascript
+const ACNSync = require('stagehack-sACN').Sender;
+ACNSync.Start({
+	interfaces: ["192.168.0.40"]
+});
+
+var sync = new ACNSync.Universe(1, 100);
+sync.on("ready", function(){
+	 // send as an array
+	this.send([255, 0, 0, 255]);
+
+	// or send as key-value pairs
+	this.send({
+	 	4: 255,
+	 	11: 150,
+	 	301: 155
+	});
+});
+```
+
 
 # Receiver
 ```javascript
