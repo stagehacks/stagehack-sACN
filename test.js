@@ -48,14 +48,17 @@ var test3receive = new ACNReceiver.Universe(3);
 test3receive.on("packet", function(packet){
   console.log("Test 3")
   test(test3send.toString(), test3receive.toString()) 
+
+  process.exit(1);
 });
 
 
 
 const ACNSenderInterface = require('./../stagehack-sACN').Sender;
-ACNSenderInterface.Start({
-  interface: "192.168.0.40"
-});
+ACNSenderInterface.Start();
+
+
+
 
 
 
@@ -89,6 +92,7 @@ function test(send, receive){
   console.log(receive.Packet.Slots);
   console.log("");
 }
+
 
 
 
