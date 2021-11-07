@@ -64,6 +64,10 @@ var universe = new ACNReceiver.Universe([universe]);
 
 ### Example:
 ```javascript
+const ACNReceiver = require('./../stagehack-sACN').Receiver;
+ACNReceiver.Start();
+
+var receiver = new ACNReceiver.Universe(1);
 receiver.on("packet", function(packet){
  console.log(packet.getSlots());
 });
