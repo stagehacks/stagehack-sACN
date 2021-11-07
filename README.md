@@ -5,7 +5,7 @@ Simple library for sending and receiving [sACN (E1.31)](https://tsp.esta.org/tsp
 **This library supports**
 * Multiple network interfaces
 * Multicast and Unicast
-* ETC Net3 (coming soon)
+* ETC Net4 (coming soon)
 
 
 ## Installation
@@ -91,4 +91,4 @@ Getters:
 
 # TODO
 * Add "allReady" event for when all Senders/Receivers are ready
-* Implement Net3
+* Implement Net4
