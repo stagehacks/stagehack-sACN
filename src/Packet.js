@@ -77,14 +77,15 @@ Packet.prototype.setSource = function (source) {
   this.update();
 };
 Packet.prototype.setSlots = function (slots) {
-  this._slots = slots;
-  this.update();
-};
-Packet.prototype.getBuffer = function () {
   this._sequence++;
   if (this._sequence > 255) {
     this._sequence = 0;
   }
+  
+  this._slots = slots;
+  this.update();
+};
+Packet.prototype.getBuffer = function () {
   this._framingLayer.writeUInt8(this._sequence, 73);
   this.update();
   return this._buffer;
@@ -117,6 +118,10 @@ Packet.prototype.fromBuffer = function (buf) {
   buf.copy(this._rootLayer, 0, 0, 38);
   buf.copy(this._framingLayer, 0, 38, 115);
   buf.copy(this._DMPLayer, 0, 115, 126);
+
+  this._priority = this._framingLayer.readUInt8(70);
+  this._sequence = this._framingLayer.readUInt8(73);
+  this._universe = this._framingLayer.readUInt16BE(75);
 
   this._slots = Array.prototype.slice.call(buf, 126);
 };
