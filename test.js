@@ -101,24 +101,23 @@ function Test5(){
   test5receive.begin();
   test5receive.on('packet', function (packet) {
     test(test5send.toString(), test5receive.toString());
-    
-    process.exit(1);
+    test5send.close();
+    Test6();
   });
 }
 
-function Test5(){
+function Test6(){
   ACNSender.Start();
-  var test5send = new ACNSender.Universe(5);
-  test5send.on('ready', function () {
-    console.log('Test 5 - Unicast');
-    this.send([1, 2, 3, 4, 5, 6, 7]);
+  var test6send = new ACNSender.Universe(6);
+  test6send.on('ready', function () {
+    console.log('Test 6 - Start Code');
+    this.send([0, 255, 0, 255]);
   });
 
-  var test5receive = new ACNReceiver.Universe(5);
-  test5receive.begin();
-  test5receive.on('packet', function (packet) {
-    test(test5send.toString(), test5receive.toString());
-    
+  var test6receive = new ACNReceiver.Universe(6);
+  test6receive.begin();
+  test6receive.on('packet', function (packet) {
+    test(test6send.toString(), test6receive.toString());
     process.exit(1);
   });
 }

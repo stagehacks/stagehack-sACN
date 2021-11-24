@@ -11,6 +11,8 @@ function Start(options) {
   if (options){
     if(options.interfaces) {
       _interfaces = options.interfaces;
+    }else{
+      _interfaces = getNetworkInterfaces();
     }
     if(options.keepAlive != false){
       startKeepAliveInterval();
@@ -48,11 +50,11 @@ function Universe(universe, priority) {
   this.packet.setUniverse(this.universe);
   this.packet.setPriority(this.priority);
 
-  if (_options && _options.cid && _options.cid.length <= 16) {
+  if (_options.cid && _options.cid.length <= 16) {
     this.packet.setCID(_options.cid);
   }
 
-  if (_options && _options.source) {
+  if (_options.source) {
     this.packet.setSource(_options.source);
   }
 

@@ -15,6 +15,7 @@ function Packet(universe, priority, cid, source) {
   this._sequence = 0x00;
   this._universe = 1;
   this._priority = 100;
+  this._startCode = 0x00;
   this._slots = [];
   this._cid = Buffer.from([
     0x29, 0x97, 0x97, 0x45, 0x80, 0x29, 0x97, 0x45, 0x80, 0x29, 0x97, 0x45,
@@ -51,7 +52,7 @@ Packet.prototype.update = function () {
   this._DMPLayer.writeUInt16BE(0x0000, 4); // First Property Address
   this._DMPLayer.writeUInt16BE(0x0001, 6); // Address Increment
   this._DMPLayer.writeUInt16BE(this._slots.length + 1, 8); // Property value count
-  this._DMPLayer.writeUInt8(0x00, 10); // START Code
+  this._DMPLayer.writeUInt8(this._startCode, 10); // Start Code
 
   this._buffer = Buffer.concat([
     this._rootLayer,
@@ -75,6 +76,10 @@ Packet.prototype.setCID = function (cid) {
 };
 Packet.prototype.setSource = function (source) {
   this._source = Buffer.from(source);
+  this.update();
+};
+Packet.prototype.setStartCode = function (code) {
+  this._startCode = code;
   this.update();
 };
 Packet.prototype.setSlots = function (slots) {
