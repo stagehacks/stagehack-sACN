@@ -51,6 +51,7 @@ Packet.prototype.update = function () {
   this._DMPLayer.writeUInt16BE(0x0000, 4); // First Property Address
   this._DMPLayer.writeUInt16BE(0x0001, 6); // Address Increment
   this._DMPLayer.writeUInt16BE(this._slots.length + 1, 8); // Property value count
+  this._DMPLayer.writeUInt8(0x00, 10); // START Code
 
   this._buffer = Buffer.concat([
     this._rootLayer,
