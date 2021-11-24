@@ -4,24 +4,34 @@ const sACNPacket = require('./Packet.js');
 
 var _interfaces = [];
 var _options = {};
+var _universes = {};
+var _keepAliveInterval;
 
 function Start(options) {
-  _options = options;
-
-  if (_options && _options.interfaces) {
-    _interfaces = _options.interfaces;
+  if (options){
+    if(options.interfaces) {
+      _interfaces = options.interfaces;
+    }
+    if(options.keepAlive != false){
+      startKeepAliveInterval();
+    }
+    _options.type = options.type;
   } else {
     _interfaces = getNetworkInterfaces();
+    startKeepAliveInterval();
   }
+
 }
 
 function Universe(universe, priority) {
   var self = this;
+
   this.universe = universe || 1;
   this.priority = priority || 100;
 
   this._sockets = [];
   this._readyCallback = function () {};
+  _universes[this.universe] = this;
 
   var j = 0;
   for (var i in _interfaces) {
@@ -45,6 +55,7 @@ function Universe(universe, priority) {
   if (_options && _options.source) {
     this.packet.setSource(_options.source);
   }
+
 }
 
 Universe.prototype.send = function (arg) {
@@ -62,12 +73,14 @@ Universe.prototype.send = function (arg) {
   this.packet.setSlots(slots);
   for (var i in _interfaces) {
     if (_options && _options.type && _options.type === 'unicast') {
+      // send packet unicast to a single destination IP
       this._sockets[_interfaces[i]].send(
         this.packet.getBuffer(),
         5568,
         _interfaces[i]
       );
     } else {
+      // send packet multicast to all members
       this._sockets[_interfaces[i]].setMulticastInterface(_interfaces[i]);
       this._sockets[_interfaces[i]].send(
         this.packet.getBuffer(),
@@ -104,6 +117,21 @@ Universe.prototype.toString = function () {
 Universe.prototype.getPossibleInterfaces = function () {
   return getNetworkInterfaces();
 };
+
+Universe.prototype.close = function(){
+  delete _universes[this.universe];
+}
+
+function startKeepAliveInterval(){
+  clearInterval(_keepAliveInterval);
+  _keepAliveInterval = setInterval(sendKeepAliveCache, 900);
+}
+
+function sendKeepAliveCache(){
+  for(var i in _universes){
+    _universes[i].send(_universes[i].packet.getSlots());
+  }
+}
 
 function getNetworkInterfaces() {
   var out = [];
