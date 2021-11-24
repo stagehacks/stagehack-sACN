@@ -1,5 +1,5 @@
 # 🔌stagehack-sACN
-Simple library for sending and receiving [sACN (E1.31)](https://tsp.esta.org/tsp/documents/docs/ANSI_E1-31-2018.pdf) lighting data. It is not the full E1.31 protocol, but should be close enough for most projects. 
+Simple library for sending and receiving [sACN (E1.31)](https://tsp.esta.org/tsp/documents/docs/ANSI_E1-31-2018.pdf) lighting data. It is not the full E1.31 protocol, but should be close enough for most projects.
 
 
 **This library supports**
@@ -23,6 +23,7 @@ var universe = new ACNSender.Universe([universe], [priority]);
 * `interfaces`: Array of IPv4 network interfaces on the device to send from. ex: `['192.168.0.40, 10.0.0.5']`
 * `cid`: 16-character UUID to represent this device. ex: `"036b2d4932174812"`
 * `source`: Plaintext name of this device. ex: `"Tim's MacBook Pro"`
+* `type`: `"unicast"` or `"multicast"`. Defaults to `"multicast"` if neither is provided
 
 ### Universe Options:
 * `universe`: Default: `1`
@@ -50,7 +51,6 @@ sender.on("ready", function(){
 ```
 
 Sender also provides `sender.getPossibleInterfaces()` which returns a list of all IPv4 network interfaces on the device. Useful for populating a dropdown or other UI.
-
 
 
 # Receiver
